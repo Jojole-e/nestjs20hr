@@ -608,7 +608,7 @@ const sessions = [
       "Config namespaces and custom configs"
     ],
     resources: [
-      { type: "yt", title: "NestJS Config & Environment", sub: "Anson the Developer · 20min", url: "https://www.youtube.com/watch?v=t4WFeFU5nxk" },
+      { type: "yt", title: "NestJS Config & Environment", sub: "Proacademy · 20min", url: "https://www.youtube.com/watch?v=0AKiaX-kfBo&pp=ygUebmVzdGpzIGNvbmZpZyBhbmQgZW52aXJvbm1lbnRz" },
       { type: "doc", title: "Configuration Docs", sub: "docs.nestjs.com/techniques/configuration", url: "https://docs.nestjs.com/techniques/configuration" },
     ],
     review: ["Remove all dotenv.config() calls and replace with ConfigService", "How do you validate that JWT_SECRET is set at startup?", "What is the difference between isGlobal: true and importing ConfigModule in each module?"]
@@ -625,7 +625,7 @@ const sessions = [
       "Return standardized response shapes"
     ],
     resources: [
-      { type: "yt", title: "Full Auth Flow in NestJS", sub: "Dave Gray · 1hr 10min", url: "https://www.youtube.com/watch?v=GHTA143_b-s" },
+      { type: "yt", title: "Full Auth Flow in NestJS", sub: "Dave Gray · 1hr 10min", url: "https://www.youtube.com/playlist?list=PLhnVDNT5zYN-WbouwtijXKFZ1JsgBEY9Y" },
       { type: "art", title: "NestJS Auth Best Practices", sub: "blog post · trilon.io", url: "https://trilon.io/blog/authentication-in-nestjs" },
     ],
     review: ["Can your Postman tests from Aurem API pass against the new Nest version?", "Where exactly does the JWT token get signed?", "How do you get the logged-in user's ID inside a controller?"]
@@ -642,7 +642,9 @@ const sessions = [
       "CRUD with Mongoose model in MusicService"
     ],
     resources: [
-      { type: "yt", title: "NestJS CRUD REST API", sub: "Traversy Media · 55min", url: "https://www.youtube.com/watch?v=0M8AYU_hPas&t=3600s" },
+      { type: "yt", title: "NestJS CRUD REST API", sub: "Literate Code · 5hrs &  45min", url: "https://www.youtube.com/watch?v=d_WqMEX6jIc&pp=ygUUTmVzdGpzIENSVUQgUkVTVCBBUEnSBwkJAwsBhyohjO8%3D" },
+      { type: "yt", title: "NestJS Build an API", sub: "Academind · 1hr &  10min", url: "https://www.youtube.com/watch?v=F_oOtaxb0L8&t=1s&pp=ygUaTmVzdEpTIEJ1bGwgUXVldWUgVHV0b3JpYWw%3D" },
+
       { type: "doc", title: "CRUD Generator", sub: "docs.nestjs.com — nest g resource", url: "https://docs.nestjs.com/recipes/crud-generator" },
     ],
     review: ["Run all your Aurem musics.rest requests against the new NestJS version", "How do you get req.userId inside a NestJS controller?", "What is the difference between @Body() and a DTO?"]
@@ -659,7 +661,12 @@ const sessions = [
       "swagger-ui-express setup"
     ],
     resources: [
-      { type: "yt", title: "NestJS Swagger Setup", sub: "Anson the Developer · 20min", url: "https://www.youtube.com/watch?v=vEbDqiSR5Wk" },
+      { type: "yt", title: "NestJS Interceptor", sub: "Anson the Developer · 24min", url: "https://www.youtube.com/watch?v=grrAhWnFs9A&list=PL_cUvD4qzbkw-phjGK2qq0nQiG6gw1cKK&index=7&pp=iAQB" },
+      { type: "yt", title: "NestJS Interceptor", sub: "Diogo the dev · 10min", url: "https://www.youtube.com/watch?v=Tcg5WKZGCZY&list=PLYHTKijk1nYE4mekWd-7AHG9zQSg7F6GO&index=9&pp=iAQB" },
+      { type: "yt", title: "NestJS Interceptor and Decorators ", sub: "Zafranudin Zafrin · 10min", url: "https://www.youtube.com/watch?v=_7EFgsri3Qo" },
+
+      { type: "yt", title: "NestJS Swagger Setup", sub: "Computerix · 15min", url: "https://www.youtube.com/watch?v=4RMzl8k6dXg&pp=ygUUTmVzdGpzIHN3YWdnZXIgc2V0dXDSBwkJAwsBhyohjO8%3D" },
+
       { type: "doc", title: "OpenAPI / Swagger Docs", sub: "docs.nestjs.com/openapi/introduction", url: "https://docs.nestjs.com/openapi/introduction" },
     ],
     review: ["Create a @CurrentUser() decorator that returns the user from JWT", "How do you protect a route and show it needs auth in Swagger?", "Add Swagger docs to your Music and Auth controllers"]
@@ -678,7 +685,8 @@ const sessions = [
       "Use case: async email on signup"
     ],
     resources: [
-      { type: "yt", title: "NestJS Bull Queue Tutorial", sub: "Marius Espejo · 35min", url: "https://www.youtube.com/watch?v=IvAy60jFuDo" },
+      { type: "yt", title: "NestJS Bull Queue Tutorial", sub: "Computerix · 45min", url: "https://www.youtube.com/watch?v=vFI_Nf2PWFQ&pp=ygUaTmVzdEpTIEJ1bGwgUXVldWUgVHV0b3JpYWw%3D" },
+      { type: "yt", title: "Bull and NestJS Tutorial", sub: "Michael Guay · 32min", url: "https://www.youtube.com/watch?v=oy-t6V6aAZY&pp=ygUaTmVzdEpTIEJ1bGwgUXVldWUgVHV0b3JpYWw%3D" },
       { type: "doc", title: "Queues Docs", sub: "docs.nestjs.com/techniques/queues", url: "https://docs.nestjs.com/techniques/queues" },
     ],
     review: ["What problem does a job queue solve vs just using async/await?", "How do you retry a failed job?", "Add a welcome-email queue job to your AuthModule SignUp"]
@@ -695,7 +703,11 @@ const sessions = [
       "Rooms and namespaces"
     ],
     resources: [
-      { type: "yt", title: "NestJS WebSockets / Chat App", sub: "Anson the Developer · 40min", url: "https://www.youtube.com/watch?v=j-tzSrT-gUk" },
+      { type: "yt", title: "NestJS WebSockets / Chat App - 1", sub: "Anson the Developer · 21min", url: "https://www.youtube.com/watch?v=iObzX8-Y5xg&list=PL_cUvD4qzbkw-phjGK2qq0nQiG6gw1cKK&index=28&pp=iAQB0gcJCQMLAYcqIYzv" },
+      { type: "yt", title: "NestJS WebSockets / Chat App - 2", sub: "Anson the Developer · 13min", url: "https://www.youtube.com/watch?v=px0jGn2Bayw&list=PL_cUvD4qzbkw-phjGK2qq0nQiG6gw1cKK&index=29&pp=iAQB" },
+      { type: "yt", title: "NestJS WebSockets / Chat App - 3", sub: "Anson the Developer · 27min", url: "https://www.youtube.com/watch?v=7mm2xUzjomk&list=PL_cUvD4qzbkw-phjGK2qq0nQiG6gw1cKK&index=30&pp=iAQB" },
+      { type: "yt", title: "Websockets in NestJs (Real-Time Chat App)", sub: "Computerix · 25min", url: "https://www.youtube.com/watch?v=eEa3u3wyYu4&pp=ygUQbmVzdGpzIHdlYnNvY2tldA%3D%3D" },
+
       { type: "doc", title: "WebSockets Docs", sub: "docs.nestjs.com/websockets/gateways", url: "https://docs.nestjs.com/websockets/gateways" },
     ],
     review: ["How is a Gateway different from a Controller?", "How do you broadcast an event to all connected clients?", "What lifecycle hooks does a Gateway have?"]
@@ -712,7 +724,11 @@ const sessions = [
       "Testing Guards and Interceptors"
     ],
     resources: [
-      { type: "yt", title: "NestJS Testing Masterclass", sub: "Marius Espejo · 50min", url: "https://www.youtube.com/watch?v=dXOfOgFFKuY" },
+      { type: "yt", title: "NestJS - Unit Testing Controllers", sub: "Anson the Developer · 26min", url: "https://www.youtube.com/watch?v=lih9VT0IZ7U&list=PL_cUvD4qzbkw-phjGK2qq0nQiG6gw1cKK&index=23&pp=iAQB" },
+      { type: "yt", title: "NestJS - Unit Testing Services and Controllers", sub: "Anson the Developer · 23min", url: "https://www.youtube.com/watch?v=dXOfOgFFKuY" },
+      { type: "yt", title: "NestJS - End to End Testing", sub: "Anson the Developer · 24min", url: "https://www.youtube.com/watch?v=LaJi0Gv6T3Q&list=PL_cUvD4qzbkw-phjGK2qq0nQiG6gw1cKK&index=26&pp=iAQBY" },
+      { type: "yt", title: "NestJS - E2E Local Auth", sub: "Anson the Developer · 16min", url: "https://www.youtube.com/watch?v=zu44RXZTabQ&list=PL_cUvD4qzbkw-phjGK2qq0nQiG6gw1cKK&index=27&pp=iAQB" },
+      { type: "yt", title: "NestJS Testing Masterclass", sub: "Marius Espejo · 50min", url: "https://www.youtube.com/watch?v=dXOfOgFFKuY&pp=ygUaTmVzdEpTIFRlc3RpbmcgTWFzdGVyY2xhc3M%3D  " },
       { type: "doc", title: "Testing Docs", sub: "docs.nestjs.com/fundamentals/testing", url: "https://docs.nestjs.com/fundamentals/testing" },
     ],
     review: ["Write a unit test for your AuthService.login() method", "What is the difference between unit test and E2E test in NestJS?", "How do you mock MongooseModel in a test?"]
@@ -729,7 +745,11 @@ const sessions = [
       "CORS configuration in main.ts"
     ],
     resources: [
-      { type: "yt", title: "NestJS Security & Rate Limiting", sub: "Anson the Developer · 22min", url: "https://www.youtube.com/watch?v=RvHdkDilhqI" },
+      { type: "yt", title: "NestJS Security & Rate Limiting", sub: "Anson the Developer · 16min", url: "https://www.youtube.com/watch?v=lHMlOvGuN58&list=PL_cUvD4qzbkw-phjGK2qq0nQiG6gw1cKK&index=31&pp=iAQB0gcJCQMLAYcqIYzv" },
+      { type: "yt", title: "NestJS Advanced Security & Rate Limiting", sub: "Computerix · 32min", url: "https://www.youtube.com/watch?v=CprSxSTgkHg&pp=ygUhTmVzdGpzIFNlY3V0aXJ5IGFuZCBSYXRlIGxpbWl0aW5n" },
+      { type: "yt", title: "NestJS API Rate Limiting", sub: "ZestMade · 20min", url: "https://www.youtube.com/watch?v=DIxYshv4E2o&pp=ygUhTmVzdGpzIFNlY3V0aXJ5IGFuZCBSYXRlIGxpbWl0aW5n" },
+      { type: "yt", title: "NestJS Caching with Redis", sub: "Michael Guay · 13min", url: "https://www.youtube.com/watch?v=KXnkhWRCj40&pp=ygUOTmVzdGpzIENhY2hpbmc%3D" },
+      { type: "yt", title: "NestJS Caching - Redis", sub: "Computerix · 18min", url: "https://www.youtube.com/watch?v=VD9XMGJQaT8&pp=ygUOTmVzdGpzIENhY2hpbmc%3D" },
       { type: "doc", title: "Caching Docs", sub: "docs.nestjs.com/techniques/caching", url: "https://docs.nestjs.com/techniques/caching" },
     ],
     review: ["Add rate limiting to your /auth/login route", "What is the difference between in-memory cache and Redis cache?", "Why is Helmet important?"]
@@ -748,7 +768,9 @@ const sessions = [
       "When to split services (don't over-engineer early)"
     ],
     resources: [
-      { type: "yt", title: "NestJS Microservices Intro", sub: "Marius Espejo · 45min", url: "https://www.youtube.com/watch?v=ISubnd6vGrk" },
+      { type: "yt", title: "NestJS Microservices Intro", sub: "Freecodecamp · 1hr & 51min", url: "https://www.youtube.com/watch?v=t76UMpwFNs0&pp=ygUUbmVzdGpzIG1pY3Jvc2VydmljZXM%3D" },
+      { type: "yt", title: "NestJS Microservices with NATS, SQL and Docker", sub: "Anson the Developer · 2hr & 20min", url: "https://www.youtube.com/watch?v=5HlsgPRcm3w&list=PL_cUvD4qzbkw-phjGK2qq0nQiG6gw1cKK&index=6&pp=iAQB" },
+      { type: "yt", title: "NestJS Microservices Intro", sub: "Tech Vision · 20min", url: "https://www.youtube.com/watch?v=I8cs8fJYF_w&pp=ygUUbmVzdGpzIG1pY3Jvc2VydmljZXM%3D" },
       { type: "doc", title: "Microservices Docs", sub: "docs.nestjs.com/microservices/basics", url: "https://docs.nestjs.com/microservices/basics" },
     ],
     review: ["What is the difference between a REST controller and a @MessagePattern handler?", "When would you NOT split into microservices?", "What transport would you use for high-throughput internal events?"]
@@ -765,7 +787,9 @@ const sessions = [
       "Structured logging for production"
     ],
     resources: [
-      { type: "yt", title: "NestJS Logging with Winston", sub: "Tom Ray · 30min", url: "https://www.youtube.com/watch?v=u6WJLzCKKlg" },
+      { type: "yt", title: "NestJS Logging", sub: "AI Cloudly · 20min", url: "https://www.youtube.com/watch?v=eYq_kOCc8K0&t=18s" },
+      { type: "yt", title: "NestJS Logging WAR", sub: "AI Cloudly · 13min", url: "https://www.youtube.com/watch?v=d8p21UGSSVY" },
+      { type: "yt", title: "NestJS Logging with Nest-winston", sub: "AI Cloudly · 13min", url: "https://www.youtube.com/watch?v=poUFjXz6Sac&pp=ygUbbmVzdGpzIGxvZ2dpbmcgd2l0aCB3aW5zdG9u" },
       { type: "doc", title: "Logger Docs", sub: "docs.nestjs.com/techniques/logger", url: "https://docs.nestjs.com/techniques/logger" },
     ],
     review: ["Replace console.log with NestJS Logger in your MusicService", "What does a health check endpoint return and why does it matter?", "What fields should every production log line include?"]
@@ -782,10 +806,28 @@ const sessions = [
       "GitHub Actions: test → build → deploy pipeline"
     ],
     resources: [
-      { type: "yt", title: "Dockerize NestJS + MongoDB", sub: "Anson the Developer · 35min", url: "https://www.youtube.com/watch?v=eSIKWdYXSsw" },
-      { type: "yt", title: "Deploy NestJS to Railway", sub: "Code With Antonio · 20min", url: "https://www.youtube.com/watch?v=V7fJSO-q8BQ" },
+      { type: "yt", title: "Dockerize NestJS + MySQL", sub: "Anson the Developer · 35min", url: "https://www.youtube.com/watch?v=a0B6MdC75z0&list=PL_cUvD4qzbkw-phjGK2qq0nQiG6gw1cKK&index=32&pp=iAQB0gcJCQMLAYcqIYzv" },
+      { type: "yt", title: "Dockerize NestJS", sub: "The Code Mood · 13min", url: "https://www.youtube.com/watch?v=nycHnesIXxo&pp=ygUdRG9ja2VyaXplIE5lc3RqcyB3aXRoIE1vbmdvZGLSBwkJAwsBhyohjO8%3D" },
+      { type: "yt", title: "Deploy NestJS to Railway", sub: "Michael Guay · 15min", url: "https://www.youtube.com/watch?v=nyMVbvWjEVA&pp=ygUYZGVwbG95IG5lc3RqcyB0byByYWlsd2F5" },
     ],
     review: ["Can your NestJS app start from a Docker image with zero extra config?", "What does the build stage in a multi-stage Dockerfile do?", "What secrets must NEVER go into your Docker image?"]
+  }
+  //Phase-6
+   {
+    phase: 6,phaseLabel: "Phase 6 — Codealong", phaseClass: "p6",
+    title: "Codealong and Develop",
+    expressMap: "Code along learn and develop concepts in the following videos.",
+    topics: [
+      "Multi-stage Dockerfile for NestJS with RabbitMq",
+      "Auths with Clerk",
+      "Search and Service Implementations",
+      "Environment config with .env and ConfigModule in Docker",
+      "Deploy to Hostinger VPS, AWS",
+    ],
+    resources: [
+      { type: "yt", title: "Nestjs Microservice Full Course", sub: "Sangam Mukherjee · 6hrs", url: "https://www.youtube.com/watch?v=lENNmjT0nyI&t=20390s&pp=ygUURGVwbG95IE5lc3RqcyBvbiBWUFM%3D" },
+      { type: "yt", title: "Full Stack E-commerece Nextjs&NestJs", sub: "Sylvaincodes · 7hrs & 45min", url: "https://www.youtube.com/watch?v=RjMvgpeoSuw&pp=ygUURGVwbG95IE5lc3RqcyBvbiBWUFM%3D" },
+    ],
   }
 ];
 
