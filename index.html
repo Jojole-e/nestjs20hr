@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NestJS 40-Hour Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #161620;
+    --border: #1e1e2e;
+    --accent: #e8173c;
+    --accent2: #ff6b35;
+    --gold: #f5c542;
+    --text: #e8e8f0;
+    --muted: #6b6b85;
+    --green: #22d98f;
+    --blue: #4f8ef7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    padding: 0 0 80px;
+  }
+
+  /* HEADER */
+  .hero {
+    padding: 60px 40px 40px;
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--gold));
+  }
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 600px;
+  }
+
+  /* STATS ROW */
+  .stats {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 32px 40px;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 24px;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+  .stat .num {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+  }
+  .stat .lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* YOUR ADVANTAGE BOX */
+  .advantage {
+    max-width: 960px;
+    margin: 0 auto 40px;
+    padding: 0 40px;
+  }
+  .advantage-box {
+    background: linear-gradient(135deg, #0f1a14, #0a1520);
+    border: 1px solid #1a3a25;
+    border-left: 3px solid var(--green);
+    border-radius: 10px;
+    padding: 24px 28px;
+  }
+  .advantage-box h3 {
+    font-size: 13px;
+    color: var(--green);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 14px;
+  }
+  .advantage-box ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .advantage-box li {
+    background: rgba(34,217,143,0.07);
+    border: 1px solid rgba(34,217,143,0.2);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 13px;
+    color: #a0f0d0;
+  }
+
+  /* PHASE TABS */
+  .tabs {
+    max-width: 960px;
+    margin: 0 auto 32px;
+    padding: 0 40px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    padding: 8px 20px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .tab.active, .tab:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  /* SESSIONS GRID */
+  .sessions {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .phase-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 8px 0;
+    margin-top: 8px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+  }
+  .phase-label.p1 { color: var(--accent); }
+  .phase-label.p2 { color: var(--accent2); }
+  .phase-label.p3 { color: var(--gold); }
+  .phase-label.p4 { color: var(--blue); }
+  .phase-label.p5 { color: var(--green); }
+
+  .session-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color .2s;
+  }
+  .session-card:hover { border-color: #2e2e44; }
+  .session-card.done { opacity: 0.6; }
+  .session-card.done .session-head { background: #0d1a0e; }
+
+  .session-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .session-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    min-width: 32px;
+  }
+  .session-title {
+    flex: 1;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .session-hours {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .check-btn {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s;
+    flex-shrink: 0;
+  }
+  .check-btn.done {
+    background: var(--green);
+    border-color: var(--green);
+  }
+  .check-btn svg { display: none; }
+  .check-btn.done svg { display: block; }
+
+  .chevron {
+    transition: transform .3s;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .chevron.open { transform: rotate(180deg); }
+
+  .session-body {
+    display: none;
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .session-body.open { display: block; }
+
+  .express-bridge {
+    background: rgba(79,142,247,0.07);
+    border: 1px solid rgba(79,142,247,0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 13px;
+    color: #a0c4ff;
+    line-height: 1.6;
+  }
+  .express-bridge strong { color: var(--blue); }
+
+  .topics {
+    margin: 14px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .topic {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+    align-items: flex-start;
+  }
+  .topic::before {
+    content: '→';
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .resources { margin-top: 16px; }
+  .resources h4 {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .resource-list { display: flex; flex-direction: column; gap: 8px; }
+  .resource {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: border-color .2s;
+  }
+  .resource:hover { border-color: #3a3a55; }
+  .resource-icon {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .yt { background: rgba(255,0,0,0.15); }
+  .doc { background: rgba(245,197,66,0.1); }
+  .art { background: rgba(79,142,247,0.1); }
+  .resource-info { flex: 1; min-width: 0; }
+  .resource-title { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.3; }
+  .resource-sub { font-size: 11px; color: var(--muted); margin-top: 2px; font-family: 'Space Mono', monospace; }
+
+  .review-box {
+    background: rgba(245,197,66,0.05);
+    border: 1px solid rgba(245,197,66,0.15);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+  .review-box h4 {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .review-box ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .review-box li {
+    font-size: 13px;
+    color: #d4c080;
+    padding-left: 16px;
+    position: relative;
+  }
+  .review-box li::before {
+    content: '?';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+  }
+
+  /* PROGRESS BAR */
+  .progress-bar-wrap {
+    max-width: 960px;
+    margin: 0 auto 32px;
+    padding: 0 40px;
+  }
+  .progress-bar-bg {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 3px;
+    transition: width .4s ease;
+  }
+  .progress-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 600px) {
+    .hero, .stats, .advantage, .tabs, .sessions, .progress-bar-wrap { padding: 0 16px; }
+    .hero { padding: 40px 16px 24px; }
+    .stats { margin-left: 16px; margin-right: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="tag">// 40-hour mastery plan</div>
+  <h1>NestJS<br><span>Roadmap</span></h1>
+  <p>20 focused 2-hour sessions. Built for someone who already ships Express apps — so we skip the basics and go straight to what NestJS actually demands you rethink.</p>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="num">20</div><div class="lbl">Sessions</div></div>
+  <div class="stat"><div class="num">40h</div><div class="lbl">Total Time</div></div>
+  <div class="stat"><div class="num">5</div><div class="lbl">Phases</div></div>
+  <div class="stat"><div class="num">15m</div><div class="lbl">Review / Session</div></div>
+</div>
+
+<div class="advantage">
+  <div class="advantage-box">
+    <h3>⚡ Your Express Head Start</h3>
+    <ul>
+      <li>✓ JWT auth already built</li>
+      <li>✓ bcrypt password hashing</li>
+      <li>✓ MongoDB / Mongoose</li>
+      <li>✓ Route separation pattern</li>
+      <li>✓ Middleware mindset</li>
+      <li>✓ Controller → Service architecture</li>
+    </ul>
+  </div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-bar-bg">
+    <span class="progress-text" id="prog-label">0 / 20 sessions</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="prog-fill" style="width:0%"></div>
+    </div>
+    <span class="progress-text" id="prog-pct">0%</span>
+  </div>
+</div>
+
+<div class="sessions" id="sessions-container"></div>
+
+<script>
+const sessions = [
+  // PHASE 1 — Foundation
+  {
+    phase: 1, phaseLabel: "Phase 1 — Foundation (Sessions 1–4)", phaseClass: "p1",
+    title: "NestJS Mental Model & CLI",
+    expressMap: "Your app.js + server.js → In Nest, this becomes AppModule + main.ts. Same job, different structure.",
+    topics: [
+      "Why NestJS exists: Angular-inspired DI & decorators",
+      "Modules, Controllers, Providers — the 3 pillars",
+      "CLI: nest new, nest g module/controller/service",
+      "main.ts bootstrap vs your server.js",
+      "Project folder structure decoded"
+    ],
+    resources: [
+      { type: "yt", title: "NestJS Crash Course", sub: "Traversy Media · 1hr 24min", url: "https://www.youtube.com/watch?v=0M8AYU_hPas" },
+      { type: "doc", title: "Official First Steps", sub: "docs.nestjs.com", url: "https://docs.nestjs.com/first-steps" },
+    ],
+    review: ["Can you explain what a Module does vs a Controller?", "How does main.ts compare to your server.js?", "What does @Injectable() actually mean?"]
+  },
+  {
+    phase: 1,
+    title: "Controllers & Routing Deep Dive",
+    expressMap: "Your musicRoutes.js + music.controller.js collapse into a single NestJS controller with decorators.",
+    topics: [
+      "@Controller, @Get, @Post, @Put, @Delete, @Patch",
+      "@Param, @Query, @Body decorators (replace req.params/body)",
+      "Route prefixes and nesting",
+      "Response object: implicit vs explicit (@Res)",
+      "Async handlers — same as your Express async functions"
+    ],
+    resources: [
+      { type: "yt", title: "Controllers & Routing in NestJS", sub: "NestJS official channel · 22min", url: "https://www.youtube.com/watch?v=GHTA143_b-s" },
+      { type: "doc", title: "Controllers Docs", sub: "docs.nestjs.com/controllers", url: "https://docs.nestjs.com/controllers" },
+    ],
+    review: ["Recreate your musicRoutes GET + POST as a NestJS controller", "What's the difference between @Param and @Query?", "When would you use @Res explicitly?"]
+  },
+  {
+    phase: 1,
+    title: "Providers & Dependency Injection",
+    expressMap: "In your code, the controller directly calls User.create(). In Nest, you inject a UsersService — same logic, swappable and testable.",
+    topics: [
+      "What is DI and why it matters",
+      "@Injectable() decorator",
+      "Constructor injection pattern",
+      "Service as a Provider",
+      "Scopes: DEFAULT vs REQUEST vs TRANSIENT"
+    ],
+    resources: [
+      { type: "yt", title: "Dependency Injection Explained", sub: "Marius Espejo · 18min", url: "https://www.youtube.com/watch?v=Nuet-yR3K9A" },
+      { type: "doc", title: "Providers Docs", sub: "docs.nestjs.com/providers", url: "https://docs.nestjs.com/providers" },
+    ],
+    review: ["Why is DI better than importing the service directly?", "What does providers: [UsersService] in a module do?", "Build a MusicService that wraps your existing music controller logic"]
+  },
+  {
+    phase: 1,
+    title: "Modules & App Architecture",
+    expressMap: "Your routes/index.js that wires up all routers = AppModule that imports all feature modules.",
+    topics: [
+      "Feature modules: UsersModule, AuthModule, MusicModule",
+      "imports / exports / providers / controllers array",
+      "Shared modules",
+      "Global modules with @Global()",
+      "Module re-exporting pattern"
+    ],
+    resources: [
+      { type: "yt", title: "NestJS Module System", sub: "Fireship · 12min", url: "https://www.youtube.com/watch?v=F_oOtaxb0L8" },
+      { type: "doc", title: "Modules Docs", sub: "docs.nestjs.com/modules", url: "https://docs.nestjs.com/modules" },
+    ],
+    review: ["Draw the module graph for your Aurem app", "What's the difference between a shared module and a global module?", "When should you export a provider from a module?"]
+  },
+
+  // PHASE 2 — Core Concepts
+  {
+    phase: 2, phaseLabel: "Phase 2 — Core NestJS (Sessions 5–9)", phaseClass: "p2",
+    title: "Pipes, Validation & DTOs",
+    expressMap: "You're currently validating inside controllers (checking req.body manually). Pipes extract this cleanly.",
+    topics: [
+      "Data Transfer Objects (DTOs) with class-validator",
+      "ValidationPipe — the most important pipe",
+      "@IsEmail(), @IsString(), @MinLength() decorators",
+      "class-transformer: plainToInstance",
+      "Global pipe setup in main.ts"
+    ],
+    resources: [
+      { type: "yt", title: "NestJS Validation & DTOs", sub: "Anson the Developer · 28min", url: "https://www.youtube.com/watch?v=ErNmEPOIJEQ" },
+      { type: "doc", title: "Validation Docs", sub: "docs.nestjs.com/techniques/validation", url: "https://docs.nestjs.com/techniques/validation" },
+    ],
+    review: ["Create a CreateUserDto that mirrors your SignUp controller inputs", "What does whitelist: true do in ValidationPipe?", "How would you validate an optional field?"]
+  },
+  {
+    phase: 2,
+    title: "Exception Handling & Filters",
+    expressMap: "Your catch(err) blocks with res.status(401).json() are replaced by throwing HttpException or using built-in exceptions.",
+    topics: [
+      "Built-in exceptions: NotFoundException, UnauthorizedException etc.",
+      "HttpException and custom exceptions",
+      "Exception Filters: @Catch()",
+      "Global exception filter setup",
+      "Mapping Mongoose errors to HTTP errors"
+    ],
+    resources: [
+      { type: "yt", title: "NestJS Exception Handling", sub: "Anson the Developer · 22min", url: "https://www.youtube.com/watch?v=ye9TiMbQAoU" },
+      { type: "doc", title: "Exception Filters Docs", sub: "docs.nestjs.com/exception-filters", url: "https://docs.nestjs.com/exception-filters" },
+    ],
+    review: ["Replace your auth.controller.js catch blocks with NestJS exceptions", "When would you write a custom exception filter?", "How do you throw a 404 in NestJS?"]
+  },
+  {
+    phase: 2,
+    title: "Guards & JWT Authentication",
+    expressMap: "Your auth.middleware.js (jwt.verify + req.userId) becomes an AuthGuard. Same logic, decorator-applied.",
+    topics: [
+      "@UseGuards() decorator",
+      "CanActivate interface",
+      "Passport.js integration: passport-jwt",
+      "@nestjs/jwt and JwtModule.register()",
+      "JwtAuthGuard: the direct replacement for your middleware",
+      "@nestjs/passport JwtStrategy"
+    ],
+    resources: [
+      { type: "yt", title: "NestJS JWT Authentication", sub: "Anson the Developer · 45min", url: "https://www.youtube.com/watch?v=3JminDpCJNE" },
+      { type: "yt", title: "Auth with Passport & JWT", sub: "Academind · 52min", url: "https://www.youtube.com/watch?v=ORxQ-K3BzQA" },
+      { type: "doc", title: "Authentication Docs", sub: "docs.nestjs.com/security/authentication", url: "https://docs.nestjs.com/security/authentication" },
+    ],
+    review: ["Port your authMiddleware to a JwtAuthGuard", "What does the JwtStrategy validate() method do?", "How do you make a route public when guards are global?"]
+  },
+  {
+    phase: 2,
+    title: "Interceptors & Middleware",
+    expressMap: "Your console.log middleware in app.js → Interceptor. Response transformation and timing also live here.",
+    topics: [
+      "NestJS Middleware (closest to Express middleware)",
+      "Interceptors: NestInterceptor + tap/map",
+      "Response transformation interceptor",
+      "Logging interceptor",
+      "Execution order: Middleware → Guard → Interceptor → Pipe → Controller"
+    ],
+    resources: [
+      { type: "yt", title: "NestJS Interceptors & Middleware", sub: "Marius Espejo · 25min", url: "https://www.youtube.com/watch?v=bMJAy4DpCSQ" },
+      { type: "doc", title: "Interceptors Docs", sub: "docs.nestjs.com/interceptors", url: "https://docs.nestjs.com/interceptors" },
+    ],
+    review: ["Draw the full request lifecycle in NestJS", "When would you use an Interceptor over a Pipe?", "Convert your logging middleware to a NestJS Interceptor"]
+  },
+  {
+    phase: 2,
+    title: "Mongoose + NestJS (MongooseModule)",
+    expressMap: "Your db.js + User/Music models plug into NestJS via @nestjs/mongoose. Your schemas stay almost identical.",
+    topics: [
+      "@nestjs/mongoose setup and MongooseModule.forRoot()",
+      "Schema decorators: @Schema(), @Prop()",
+      "@InjectModel() in services",
+      "forFeature() pattern for feature modules",
+      "Soft deletes, virtuals, and indexes in NestJS schemas"
+    ],
+    resources: [
+      { type: "yt", title: "NestJS + MongoDB with Mongoose", sub: "Anson the Developer · 38min", url: "https://www.youtube.com/watch?v=ulfU5vY6I78" },
+      { type: "doc", title: "Mongoose Techniques", sub: "docs.nestjs.com/techniques/mongodb", url: "https://docs.nestjs.com/techniques/mongodb" },
+    ],
+    review: ["Convert your User and Music Mongoose models to NestJS @Schema()", "What does @InjectModel(User.name) do?", "How do you access the model in a service?"]
+  },
+
+  // PHASE 3 — Real App
+  {
+    phase: 3, phaseLabel: "Phase 3 — Build a Real Feature (Sessions 10–13)", phaseClass: "p3",
+    title: "Config, Environment & Secrets",
+    expressMap: "Your dotenv.config({ path: './config.env' }) in every file → centralized ConfigModule that injects anywhere.",
+    topics: [
+      "@nestjs/config and ConfigModule.forRoot()",
+      "ConfigService injection",
+      "Validation of env vars with Joi",
+      "Multiple .env files (dev/prod/test)",
+      "Config namespaces and custom configs"
+    ],
+    resources: [
+      { type: "yt", title: "NestJS Config & Environment", sub: "Anson the Developer · 20min", url: "https://www.youtube.com/watch?v=t4WFeFU5nxk" },
+      { type: "doc", title: "Configuration Docs", sub: "docs.nestjs.com/techniques/configuration", url: "https://docs.nestjs.com/techniques/configuration" },
+    ],
+    review: ["Remove all dotenv.config() calls and replace with ConfigService", "How do you validate that JWT_SECRET is set at startup?", "What is the difference between isGlobal: true and importing ConfigModule in each module?"]
+  },
+  {
+    phase: 3,
+    title: "Rebuild AuthModule (Register + Login)",
+    expressMap: "Direct port of your auth.controller.js — SignUp + LogIn — into proper NestJS architecture with DTOs and Guards.",
+    topics: [
+      "AuthModule, AuthController, AuthService",
+      "CreateUserDto / LoginDto with validation",
+      "bcrypt in AuthService (same as your password.js util)",
+      "JWT sign in AuthService using JwtService",
+      "Return standardized response shapes"
+    ],
+    resources: [
+      { type: "yt", title: "Full Auth Flow in NestJS", sub: "Dave Gray · 1hr 10min", url: "https://www.youtube.com/watch?v=GHTA143_b-s" },
+      { type: "art", title: "NestJS Auth Best Practices", sub: "blog post · trilon.io", url: "https://trilon.io/blog/authentication-in-nestjs" },
+    ],
+    review: ["Can your Postman tests from Aurem API pass against the new Nest version?", "Where exactly does the JWT token get signed?", "How do you get the logged-in user's ID inside a controller?"]
+  },
+  {
+    phase: 3,
+    title: "Rebuild MusicModule (Full CRUD)",
+    expressMap: "Direct port of your music.controller.js — all 5 CRUD routes — using NestJS controller + service + DTO pattern.",
+    topics: [
+      "MusicModule, MusicController, MusicService",
+      "CreateMusicDto, UpdateMusicDto",
+      "Applying JwtAuthGuard to the whole controller",
+      "@Request() to extract userId from JWT payload",
+      "CRUD with Mongoose model in MusicService"
+    ],
+    resources: [
+      { type: "yt", title: "NestJS CRUD REST API", sub: "Traversy Media · 55min", url: "https://www.youtube.com/watch?v=0M8AYU_hPas&t=3600s" },
+      { type: "doc", title: "CRUD Generator", sub: "docs.nestjs.com — nest g resource", url: "https://docs.nestjs.com/recipes/crud-generator" },
+    ],
+    review: ["Run all your Aurem musics.rest requests against the new NestJS version", "How do you get req.userId inside a NestJS controller?", "What is the difference between @Body() and a DTO?"]
+  },
+  {
+    phase: 3,
+    title: "Decorators, Custom Decorators & Swagger",
+    expressMap: "No equivalent in your Express app — this is where NestJS starts to pull ahead.",
+    topics: [
+      "Custom param decorators: @CurrentUser()",
+      "@SetMetadata() and Reflector for role-based access",
+      "@nestjs/swagger: ApiTags, ApiOperation, ApiBearerAuth",
+      "Auto-generate API docs from DTOs",
+      "swagger-ui-express setup"
+    ],
+    resources: [
+      { type: "yt", title: "NestJS Swagger Setup", sub: "Anson the Developer · 20min", url: "https://www.youtube.com/watch?v=vEbDqiSR5Wk" },
+      { type: "doc", title: "OpenAPI / Swagger Docs", sub: "docs.nestjs.com/openapi/introduction", url: "https://docs.nestjs.com/openapi/introduction" },
+    ],
+    review: ["Create a @CurrentUser() decorator that returns the user from JWT", "How do you protect a route and show it needs auth in Swagger?", "Add Swagger docs to your Music and Auth controllers"]
+  },
+
+  // PHASE 4 — Advanced
+  {
+    phase: 4, phaseLabel: "Phase 4 — Go Deeper (Sessions 14–17)", phaseClass: "p4",
+    title: "Queues & Background Jobs (BullMQ)",
+    expressMap: "Your Express app handles everything synchronously. Queues let you offload email, processing, uploads.",
+    topics: [
+      "@nestjs/bull and BullModule.registerQueue()",
+      "@Processor() and @Process() decorators",
+      "Adding jobs: this.queue.add()",
+      "Job lifecycle: active, completed, failed",
+      "Use case: async email on signup"
+    ],
+    resources: [
+      { type: "yt", title: "NestJS Bull Queue Tutorial", sub: "Marius Espejo · 35min", url: "https://www.youtube.com/watch?v=IvAy60jFuDo" },
+      { type: "doc", title: "Queues Docs", sub: "docs.nestjs.com/techniques/queues", url: "https://docs.nestjs.com/techniques/queues" },
+    ],
+    review: ["What problem does a job queue solve vs just using async/await?", "How do you retry a failed job?", "Add a welcome-email queue job to your AuthModule SignUp"]
+  },
+  {
+    phase: 4,
+    title: "WebSockets & Real-time with Gateways",
+    expressMap: "No equivalent — entirely new territory. NestJS makes this elegant.",
+    topics: [
+      "@WebSocketGateway() and @SubscribeMessage()",
+      "socket.io with @nestjs/websockets",
+      "Emitting events: @WebSocketServer() server",
+      "Auth in WebSocket connections",
+      "Rooms and namespaces"
+    ],
+    resources: [
+      { type: "yt", title: "NestJS WebSockets / Chat App", sub: "Anson the Developer · 40min", url: "https://www.youtube.com/watch?v=j-tzSrT-gUk" },
+      { type: "doc", title: "WebSockets Docs", sub: "docs.nestjs.com/websockets/gateways", url: "https://docs.nestjs.com/websockets/gateways" },
+    ],
+    review: ["How is a Gateway different from a Controller?", "How do you broadcast an event to all connected clients?", "What lifecycle hooks does a Gateway have?"]
+  },
+  {
+    phase: 4,
+    title: "Testing: Unit + E2E",
+    expressMap: "You likely have no tests in Aurem — NestJS is built with testing in mind from day one.",
+    topics: [
+      "Jest setup (comes built-in)",
+      "Unit testing a Service: TestingModule",
+      "Mocking providers with jest.fn()",
+      "E2E testing with supertest",
+      "Testing Guards and Interceptors"
+    ],
+    resources: [
+      { type: "yt", title: "NestJS Testing Masterclass", sub: "Marius Espejo · 50min", url: "https://www.youtube.com/watch?v=dXOfOgFFKuY" },
+      { type: "doc", title: "Testing Docs", sub: "docs.nestjs.com/fundamentals/testing", url: "https://docs.nestjs.com/fundamentals/testing" },
+    ],
+    review: ["Write a unit test for your AuthService.login() method", "What is the difference between unit test and E2E test in NestJS?", "How do you mock MongooseModel in a test?"]
+  },
+  {
+    phase: 4,
+    title: "Caching, Rate Limiting & Security",
+    expressMap: "Express requires separate packages for each. NestJS wraps these in a unified decorator-based API.",
+    topics: [
+      "@nestjs/cache-manager: @CacheKey(), @CacheTTL()",
+      "Redis as cache store",
+      "@nestjs/throttler: rate limiting with @Throttle()",
+      "Helmet for HTTP security headers",
+      "CORS configuration in main.ts"
+    ],
+    resources: [
+      { type: "yt", title: "NestJS Security & Rate Limiting", sub: "Anson the Developer · 22min", url: "https://www.youtube.com/watch?v=RvHdkDilhqI" },
+      { type: "doc", title: "Caching Docs", sub: "docs.nestjs.com/techniques/caching", url: "https://docs.nestjs.com/techniques/caching" },
+    ],
+    review: ["Add rate limiting to your /auth/login route", "What is the difference between in-memory cache and Redis cache?", "Why is Helmet important?"]
+  },
+
+  // PHASE 5 — Production
+  {
+    phase: 5, phaseLabel: "Phase 5 — Production Ready (Sessions 18–20)", phaseClass: "p5",
+    title: "Microservices & Transport Layer",
+    expressMap: "Express monolith → NestJS supports microservices natively. Even if you don't use it now, understanding it shapes architecture decisions.",
+    topics: [
+      "Monolith vs Microservice in NestJS",
+      "ClientProxy and @MessagePattern()",
+      "Transport layers: TCP, Redis, NATS",
+      "@nestjs/microservices setup",
+      "When to split services (don't over-engineer early)"
+    ],
+    resources: [
+      { type: "yt", title: "NestJS Microservices Intro", sub: "Marius Espejo · 45min", url: "https://www.youtube.com/watch?v=ISubnd6vGrk" },
+      { type: "doc", title: "Microservices Docs", sub: "docs.nestjs.com/microservices/basics", url: "https://docs.nestjs.com/microservices/basics" },
+    ],
+    review: ["What is the difference between a REST controller and a @MessagePattern handler?", "When would you NOT split into microservices?", "What transport would you use for high-throughput internal events?"]
+  },
+  {
+    phase: 5,
+    title: "Logging, Health Checks & Observability",
+    expressMap: "Your console.log in routes is production-unusable. This session gives you a real logging strategy.",
+    topics: [
+      "NestJS built-in Logger vs custom Logger",
+      "Winston / Pino integration",
+      "@nestjs/terminus health checks",
+      "Custom health indicators (MongoDB check)",
+      "Structured logging for production"
+    ],
+    resources: [
+      { type: "yt", title: "NestJS Logging with Winston", sub: "Tom Ray · 30min", url: "https://www.youtube.com/watch?v=u6WJLzCKKlg" },
+      { type: "doc", title: "Logger Docs", sub: "docs.nestjs.com/techniques/logger", url: "https://docs.nestjs.com/techniques/logger" },
+    ],
+    review: ["Replace console.log with NestJS Logger in your MusicService", "What does a health check endpoint return and why does it matter?", "What fields should every production log line include?"]
+  },
+  {
+    phase: 5,
+    title: "Dockerize, Deploy & CI/CD",
+    expressMap: "Same Docker concepts — just the Dockerfile looks slightly different for a NestJS build.",
+    topics: [
+      "Multi-stage Dockerfile for NestJS",
+      "docker-compose with MongoDB and Redis",
+      "Environment config with .env and ConfigModule in Docker",
+      "Deploy to Railway / Render / EC2",
+      "GitHub Actions: test → build → deploy pipeline"
+    ],
+    resources: [
+      { type: "yt", title: "Dockerize NestJS + MongoDB", sub: "Anson the Developer · 35min", url: "https://www.youtube.com/watch?v=eSIKWdYXSsw" },
+      { type: "yt", title: "Deploy NestJS to Railway", sub: "Code With Antonio · 20min", url: "https://www.youtube.com/watch?v=V7fJSO-q8BQ" },
+    ],
+    review: ["Can your NestJS app start from a Docker image with zero extra config?", "What does the build stage in a multi-stage Dockerfile do?", "What secrets must NEVER go into your Docker image?"]
+  }
+];
+
+let completedSessions = new Set(JSON.parse(localStorage.getItem('nestjs-done') || '[]'));
+
+function saveState() {
+  localStorage.setItem('nestjs-done', JSON.stringify([...completedSessions]));
+}
+
+function updateProgress() {
+  const done = completedSessions.size;
+  const total = sessions.length;
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('prog-label').textContent = `${done} / ${total} sessions`;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+}
+
+function renderSessions(filterPhase) {
+  const container = document.getElementById('sessions-container');
+  container.innerHTML = '';
+  let lastPhase = null;
+  let sessionNumber = 0;
+
+  sessions.forEach((s, i) => {
+    if (filterPhase !== 0 && s.phase !== filterPhase) return;
+
+    sessionNumber++;
+    const globalIndex = i;
+
+    if (s.phaseLabel && (filterPhase === 0)) {
+      const label = document.createElement('div');
+      label.className = `phase-label ${s.phaseClass}`;
+      label.textContent = s.phaseLabel;
+      container.appendChild(label);
+    }
+
+    const isDone = completedSessions.has(globalIndex);
+    const card = document.createElement('div');
+    card.className = `session-card${isDone ? ' done' : ''}`;
+    card.id = `card-${globalIndex}`;
+
+    const hours = `${(i * 2) + 1}h – ${(i * 2) + 2}h`;
+
+    card.innerHTML = `
+      <div class="session-head" onclick="toggleBody(${globalIndex})">
+        <span class="session-num">${String(filterPhase === 0 ? i + 1 : sessionNumber).padStart(2, '0')}</span>
+        <span class="session-title">${s.title}</span>
+        <span class="session-hours">${hours}</span>
+        <button class="check-btn${isDone ? ' done' : ''}" onclick="toggleDone(event, ${globalIndex})">
+          <svg width="12" height="10" viewBox="0 0 12 10" fill="none">
+            <path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </div>
+      <div class="session-body" id="body-${globalIndex}">
+        ${s.expressMap ? `<div class="express-bridge"><strong>🔀 Express → NestJS:</strong> ${s.expressMap}</div>` : ''}
+        <div class="topics">
+          ${s.topics.map(t => `<div class="topic">${t}</div>`).join('')}
+        </div>
+        <div class="resources">
+          <h4>Resources</h4>
+          <div class="resource-list">
+            ${s.resources.map(r => `
+              <a href="${r.url}" target="_blank" class="resource">
+                <div class="resource-icon ${r.type}">
+                  ${r.type === 'yt' ? '▶' : r.type === 'doc' ? '📄' : '📝'}
+                </div>
+                <div class="resource-info">
+                  <div class="resource-title">${r.title}</div>
+                  <div class="resource-sub">${r.sub}</div>
+                </div>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b6b85" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+            `).join('')}
+          </div>
+        </div>
+        <div class="review-box">
+          <h4>⏱ 15-Min Review</h4>
+          <ul>
+            ${s.review.map(q => `<li>${q}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function toggleBody(i) {
+  const body = document.getElementById(`body-${i}`);
+  const head = body.previousElementSibling;
+  const chevron = head.querySelector('.chevron');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  chevron.classList.toggle('open', !isOpen);
+}
+
+function toggleDone(e, i) {
+  e.stopPropagation();
+  if (completedSessions.has(i)) {
+    completedSessions.delete(i);
+  } else {
+    completedSessions.add(i);
+  }
+  saveState();
+  const card = document.getElementById(`card-${i}`);
+  const btn = card.querySelector('.check-btn');
+  card.classList.toggle('done', completedSessions.has(i));
+  btn.classList.toggle('done', completedSessions.has(i));
+  updateProgress();
+}
+
+// Tabs
+let activePhase = 0;
+function setPhase(phase, el) {
+  activePhase = phase;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderSessions(phase);
+}
+
+// Init
+renderSessions(0);
+updateProgress();
+</script>
+
+<div class="tabs" style="margin-top:32px;">
+  <button class="tab active" onclick="setPhase(0, this)">All</button>
+  <button class="tab" onclick="setPhase(1, this)">Phase 1</button>
+  <button class="tab" onclick="setPhase(2, this)">Phase 2</button>
+  <button class="tab" onclick="setPhase(3, this)">Phase 3</button>
+  <button class="tab" onclick="setPhase(4, this)">Phase 4</button>
+  <button class="tab" onclick="setPhase(5, this)">Phase 5</button>
+</div>
+
+</body>
+</html>
